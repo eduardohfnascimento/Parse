@@ -1,1 +1,0 @@
-print(Trabalho de linguagens formais)
