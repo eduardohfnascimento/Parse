@@ -75,13 +75,14 @@ def leGramatica(nomeArq):
 	
 #Imprime a gramatica
 def imprimeGramatica(Gramatica):
-    print 'V = ',Gramatica[0],'\n'
-    print 'T = ',Gramatica[1],'\n'
+	print 'G = {V,T,P,S}, onde:\n'
+	print 'V = ',Gramatica[0],'\n'
+	print 'T = ',Gramatica[1],'\n'
     
-    print 'P = {'
-    P = Gramatica[2]
-    for prod in P:
-        print '  ',prod,','
-    
-    print '  }\nS = ',Gramatica[3],'\n'
-    return;
+	print 'P = {'
+	P = Gramatica[2]
+	for prod in P:
+		print '  ',prod,','
+
+	print '  }\nS = ',Gramatica[3],'\n'
+	return;
