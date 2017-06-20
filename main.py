@@ -1,8 +1,8 @@
 import extrai
-import earley
+import early
 
 #Imprime a gramatica
-def imprimeGramatica(Gramatica):
+def printGramatica(Gramatica):
 	print 'G = {V,T,P,S}, onde:\n'
 	print 'V = ',Gramatica[0],'\n'
 	print 'T = ',Gramatica[1],'\n'
@@ -11,7 +11,7 @@ def imprimeGramatica(Gramatica):
 	P = Gramatica[2]
 	for prod in P:
 		producoes = ""
-		for simbolo in prod[1:len(prod)]:
+		for simbolo in prod[1:len(prod)-1]:
 			producoes=producoes+simbolo+' '
 		print prod[0],'>',producoes
 
@@ -26,15 +26,22 @@ if not('.txt' in nome_arq):
     nome_arq = nome_arq + '.txt'
 	
 gram = extrai.leGramatica(nome_arq)
-imprimeGramatica(gram)
+printGramatica(gram)
 
-frase = str(raw_input("\nPor favor, insira uma sentenca com terminais pertencentes a gramatica: "))
-sent = earley.terminaisSentenca(frase,gram)
-while sent == -1:
+laco = True
+while laco:
 	frase = str(raw_input("\nPor favor, insira uma sentenca com terminais pertencentes a gramatica: "))
-	sent = earley.terminaisSentenca(frase,gram)
+	sent = early.terminaisSentenca(frase,gram)
+	while sent == -1:
+		frase = str(raw_input("Por favor, insira uma sentenca com terminais pertencentes a gramatica: "))
+		sent = early.terminaisSentenca(frase,gram)
 
-#sent possui uma lista com os terminais da sentenca a se determinar se faz parte da gramatica
-
-d0=earley.etapa1(gram)
-print d0
+	aceita=early.early(sent,gram)
+	if aceita:
+		print 'Faz parte da gramatica!'
+	else:
+		print 'Nao faz parte da gramatica...'
+	
+	teste = str(raw_input("Deseja testar nova sentenca? (N para sair)"))
+	if teste == 'N' or teste == 'n':
+		laco = False

@@ -39,7 +39,7 @@ def leProducao(linha):
 		if i != (-1):
 			producao.append(dir[0:i]) #Insere variavel/terminal
 			dir = dir[i+1:len(dir)]
-			
+	producao.append('\\')
 	return producao;
 	
 #Extrai a gramatica contida em um arquivo
@@ -48,6 +48,7 @@ def leProducao(linha):
 #V: array com as variaveis da gramatica
 #T: array com os terminais da gramatica
 #P: array de arrays, com as producoes da gramatica, sendo que o primeiro elemento eh a variavel a esquerda, e os demais a producao desta variavel
+#S: string, simbolo inicial da gramatica
 def leGramatica(nomeArq):
 	arq = open(nomeArq,'r')
 	V=[]
@@ -72,4 +73,3 @@ def leGramatica(nomeArq):
 				S=limpaLinha(linha)
 	Gramatica = [V,T,P,S]
 	return Gramatica;
-	
