@@ -1,8 +1,9 @@
 import extrai
-import earley
+import early
+import gerador
 
 #Imprime a gramatica
-def imprimeGramatica(Gramatica):
+def printGramatica(Gramatica):
 	print 'G = {V,T,P,S}, onde:\n'
 	print 'V = ',Gramatica[0],'\n'
 	print 'T = ',Gramatica[1],'\n'
@@ -11,9 +12,9 @@ def imprimeGramatica(Gramatica):
 	P = Gramatica[2]
 	for prod in P:
 		producoes = ""
-		for simbolo in prod[1:len(prod)]:
-			producoes=producoes+simbolo+' '
-		print prod[0],'>',producoes
+		for ind in range(1,len(prod[0])-1):
+			producoes=producoes+prod[0][ind]+' '
+		print prod[0][0],'>',producoes
 
 	print '  }\nS = ',Gramatica[3],'\n'
 	return;
@@ -26,15 +27,14 @@ if not('.txt' in nome_arq):
     nome_arq = nome_arq + '.txt'
 	
 gram = extrai.leGramatica(nome_arq)
-imprimeGramatica(gram)
+#printGramatica(gram)
 
-frase = str(raw_input("\nPor favor, insira uma sentenca com terminais pertencentes a gramatica: "))
-sent = earley.terminaisSentenca(frase,gram)
-while sent == -1:
-	frase = str(raw_input("\nPor favor, insira uma sentenca com terminais pertencentes a gramatica: "))
-	sent = earley.terminaisSentenca(frase,gram)
 
-#sent possui uma lista com os terminais da sentenca a se determinar se faz parte da gramatica
 
-d0=earley.etapa1(gram)
-print d0
+
+laco = True
+while laco:
+        print gerador.geraSentenca(gram),'\n\n\n'
+        teste = str(raw_input("Deseja criar nova sentenca? (Pressione enter para criar, escreva qualquer coisa e pressione enter para sair)"))
+        if teste != '':
+                laco = False

@@ -1,46 +1,45 @@
 import string
 
-#Remove os caracteres ' ', '\n', '\t', '[' e ']', e comentarios ('#' seguido de qualquer sequencia de caracteres)
+#Retorna uma variavel, terminal ou o simbolo inicial, descartando as demais informacoes da linha
 def limpaLinha(linha):
-	linha = linha.replace(' ', '')
-	linha = linha.replace('\n', '')
-	linha = linha.replace('\t', '')
-	linha = linha.replace('[', '')
-	linha = linha.replace(']', '')
-	
-	i = linha.find('#')
-	if i != (-1):
-		linha=linha[0:i] #Elimina comentario
+	i = linha.find('[')
+	j = linha.find(']')
 		
-	return linha;
+	return linha[i+2:j-1]; #Ignora os colchetes e o espaco depois do primeiro e o antes do segundo
 
 #Semelhante a limpaLinha, mas separa os elementos da string (serve para as producoes)
 def leProducao(linha):
 	producao=[]
 
-	linha = linha.replace(' ', '')
-	linha = linha.replace('\n', '')
-	linha = linha.replace('\t', '')
-	linha = linha.replace('[', '')
-	#Nao elimina ']', para separar as variaveis/terminais que sao produzidos
-	
 	i = linha.find('#')
 	if i != (-1):
 		linha=linha[0:i] #Elimina comentario
 	
-	i = linha.find('>')
-	producao.append(linha[0:i-1]) #Insere a variavel a esquerda
+	i=linha.find('[')
+	j=linha.find(']')
+	producao.append(linha[i+2:j-1]) #Insere a variavel a esquerda
 	
-	dir=linha[i+1:len(linha)] #Dir possui as producoes da variavel a esquerda, separadas por ']'
+	i = linha.find('>')
+	
+	dir=linha[i+1:len(linha)] #Dir possui as producoes da variavel a esquerda
 	
 	i=1
 	while i != (-1):
-		i = dir.find(']')
-		if i != (-1):
-			producao.append(dir[0:i]) #Insere variavel/terminal
-			dir = dir[i+1:len(dir)]
-			
-	return producao;
+		i = dir.find('[')
+		j = dir.find(']')
+		if i != (-1) and j != (-1):
+			producao.append(dir[i+2:j-1]) #Insere variavel/terminal
+			dir = dir[j+1:len(dir)]
+	producao.append('\\')
+	i=dir.find(';')+1
+	if i!=0:
+		j=i
+		while j < len(linha) and linha[j]!=' ':
+			j+=1
+		peso=dir[i:j]
+	else:			#Caso nao possua peso, atribui peso = 1
+		peso=1		#
+	return [producao,peso[0:len(peso)-1]]; #Remove '\n' do peso
 	
 #Extrai a gramatica contida em um arquivo
 #Retorna um array com 4 elementos, sendo eles:
@@ -48,6 +47,7 @@ def leProducao(linha):
 #V: array com as variaveis da gramatica
 #T: array com os terminais da gramatica
 #P: array de arrays, com as producoes da gramatica, sendo que o primeiro elemento eh a variavel a esquerda, e os demais a producao desta variavel
+#S: string, simbolo inicial da gramatica
 def leGramatica(nomeArq):
 	arq = open(nomeArq,'r')
 	V=[]
@@ -59,17 +59,17 @@ def leGramatica(nomeArq):
 	arquivo = arq.readlines()
 	arq.close()
 	for linha in arquivo:
-		if linha[0]!='[':
+		if linha[0]!='[' and linha[0]!='#':		# Caso a linha seja um comentario, ignora o seu conteudo
 			tipo = linha[0]
 		else:
-			if tipo == 'V':
+			if tipo == 'V' and linha[0]!='#': 	#
 				V.append(limpaLinha(linha))
-			elif tipo == 'T':
+			elif tipo == 'T' and linha[0]!='#': #
 				T.append(limpaLinha(linha))
-			elif tipo == 'R':
+			elif tipo == 'R' and linha[0]!='#': #
 				P.append(leProducao(linha))
 			else:
-				S=limpaLinha(linha)
+				if linha[0]!='#':				#
+					S=limpaLinha(linha)
 	Gramatica = [V,T,P,S]
 	return Gramatica;
-	
