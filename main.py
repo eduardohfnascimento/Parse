@@ -1,5 +1,4 @@
 import extrai
-import early
 import gerador
 
 #Imprime a gramatica
