@@ -42,7 +42,9 @@ def geraSentencaAux(gram,regra):
 			
 			regra[1]+=1
 		else:
+			sentenca+=' "'
 			sentenca+=regra[0][0][regra[1]]
+			sentenca+='" '
 			regra[1]+=1
 	
 	return sentenca;
@@ -64,6 +66,8 @@ def geraSentenca(gram):
 			
 			inicial[1]+=1									#Avanca o marcador
 		else:											#Se o proximo termo da regra inicial for um terminal
-			sentenca+=inicial[0][0][inicial[1]]			#Adiciona o terminal a sentenca
+			sentenca+=' "'
+			sentenca+=inicial[0][0][inicial[1]]
+			sentenca+='" '
 			inicial[1]+=1								#Avanca o marcador
 	return sentenca;

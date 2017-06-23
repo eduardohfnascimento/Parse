@@ -1,0 +1,185 @@
+####################################
+# The Superhero Movie Plot Generator
+####################################
+# Eduardo Henrique do Nascimento - 00260846
+# Gabriel Tadiello - 00277942
+# Laura Soares - 00245174
+# Lorenzo Millani - 00261610
+####################################
+#########
+Terminais
+#########
+[ in early 1980's,  ]
+[ during world war ii,  ]
+[ back in ancient times,  ]
+[ at the beginning of patriarchy, ]
+[ the kgb  ]
+[ incredibily evil german forces  ]
+[ extraterrestrials  ]
+[ while seeking wisdom  ]
+[ while looking for a weapon of mass destruction  ]
+[ while searching for the holy graal  ]
+[ stumbled in the lost continent of Atlantis.  ]
+[ happened to find out a weapon of mass destruction.  ]
+[ discovered a very old and suspicious underground tunnel.  ]
+[ awakened a sleeping volcano.  ]
+[ triggered an extraterrestrial weapon of mass destruction hidden on earth long ago.  ]
+[ nowadays,  ]
+[ centuries have passed, and now  ]
+[ captain america  ]
+[ wonder woman  ]
+[ tha batman  ]
+[ the wolverine  ]
+[ duck dodgers  ]
+[ is no longer the trustworthy superhero it once was.  ]
+[ finds troubles in dealing with daily routine.  ]
+[ can't believe the united states elected trump.  ]
+[ when nobody expected,  ]
+[ suddenly and unnoticed,  ]
+[ after years of careful planning,  ]
+[ are now on the imminence of destroying  ]
+[ spreads fear in  ]
+[ sows a new genetically modified disease in  ]
+[ new zeland.  ]
+[ the moon.  ]
+[ the royal palace of genovia.  ]
+[ it is now up to our hero and its friends to  ]
+[ save the helpless citizens.  ]
+[ stop the plague.  ]
+[ help townsville, that is being attacked.  ]
+[ the alien ship suddenly crashes in the middle of  ]
+[ they are not in time to prevent the distruction of  ]
+[ then, a huge fight against the forces of evil takes place in  ]
+[ london,  ]
+[ new york,  ]
+[ trump's garden,  ]
+[ some unimportant third-world country,  ]
+[ and our hero have to deal with the loss of  ]
+[ its comrades.  ]
+[ its pet parakeet.  ]
+[ the american standarts and moral.  ]
+[ the world peace.  ]
+[ however, life goes on, and after this obnoxious events  ]
+[ no one is sure of what happened to the bad guys.  ]
+[ a far more evil guy gets pissed off and its ready to take action.  ]
+[ the weapon of mass distruction is put under guard of some inept folk.  ]
+#########
+Variaveis
+#########
+[ start ]
+[ troubled-hero-intro ]
+[ conflict ]
+[ last-century-prologue ]
+[ nowadays-situation ]
+[ date ]
+[ irrelative-synopsis ]
+[ bad-guys ]
+[ looking-after-ancient-artefacts ]
+[ triggered-hideous-disaster ]
+[ seeking-something ]
+[ stumbles-in-something-weird ]
+[ meanwhile ]
+[ hero-in-existential-crisis ]
+[ hero ]
+[ existential-crisis ]
+[ something-happens ]
+[ huge-fight ]
+[ transition ]
+[ bad-guys-threatens-someplace ]
+[ threatens-someplace ]
+[ threatens ]
+[ someplace ]
+[ our-hero-and-his-friends ]
+[ save-the-day ]
+[ rescue-someone ] 
+[ while-messing-with-big-city ]
+[ causes-mass-distruction ]
+[ someone-important-dies ]
+[ some-disaster ]
+[ somewhere ]
+[ mourning ]
+[ fast-recovery ]
+[ sorrow-message ] 
+[ someone-dead ]
+[ hopeful-message ]
+[ open-thread-for-sequel ]
+#######
+Inicial
+#######
+[ start ]
+######
+Regras
+######
+[ start ] > [ troubled-hero-intro ] [ conflict ] ;1
+[ troubled-hero-intro ] > [ last-century-prologue ] [ nowadays-situation ] ;1
+[ last-century-prologue ] > [ date ] [ irrelative-synopsis ] ;1
+[ date ] > [ in early 1980's,  ] ;0.2
+[ date ] > [ during world war ii,  ] ;0.4
+[ date ] > [ back in ancient times,  ] ;0.2
+[ date ] > [ at the beginning of patriarchy, ] ;0.2
+[ irrelative-synopsis ] > [ bad-guys ] [ looking-after-ancient-artefacts ] ;0.7
+[ irrelative-synopsis ] > [ bad-guys ] [ triggered-hideous-disaster ] ;0.3
+[ bad-guys ] > [ the kgb  ] ;0.2
+[ bad-guys ] > [ incredibily evil german forces  ] ;0.3
+[ bad-guys ] > [ extraterrestrials  ] ;0.5
+[ looking-after-ancient-artefacts ] > [ seeking-something ] [ stumbles-in-something-weird ] ;1
+[ seeking-something ] > [ while seeking wisdom  ] ;0.3
+[ seeking-something ] > [ while looking for a weapon of mass destruction  ] ;0.5
+[ seeking-something ] > [ while searching for the holy graal  ] ;0.2
+[ stumbles-in-something-weird ] > [ stumbled in the lost continent of Atlantis.  ] ;0.3
+[ stumbles-in-something-weird ] > [ happened to find out a weapon of mass destruction.  ] ;0.6
+[ stumbles-in-something-weird ] > [ discovered a very old and suspicious underground tunnel.  ] ;0.1
+[ triggered-hideous-disaster ] > [ awakened a sleeping volcano.  ] ;0.4
+[ triggered-hideous-disaster ] > [ triggered an extraterrestrial weapon of mass destruction hidden on earth long ago.  ] ;0.6
+[ nowadays-situation ] > [ meanwhile ] [ hero-in-existential-crisis ] ;1
+[ meanwhile ] > [ nowadays,  ] ;0.7
+[ meanwhile ] > [ centuries have passed, and now  ] ;0.3
+[ hero-in-existential-crisis ] > [ hero ] [ existential-crisis ] ;1
+[ hero ] > [ captain america  ] ;0.2
+[ hero ] > [ wonder woman  ] ;0.2
+[ hero ] > [ tha batman  ] ;0.2
+[ hero ] > [ the wolverine  ] ;0.2
+[ hero ] > [ duck dodgers  ] ;0.2
+[ existential-crisis ] > [ is no longer the trustworthy superhero it once was.  ] ;0.3
+[ existential-crisis ] > [ finds troubles in dealing with daily routine.  ] ;0.3
+[ existential-crisis ] > [ can't believe the united states elected trump.  ] ;0.4
+[ conflict ] > [ something-happens ] [ huge-fight ] ;1
+[ something-happens ] > [ transition ] [ bad-guys-threatens-someplace ] ;1
+[ transition ] > [ when nobody expected,  ] ;0.8
+[ transition ] > [ suddenly and unnoticed,  ] ;0.1
+[ transition ] > [ after years of careful planning,  ] ;0.1
+[ bad-guys-threatens-someplace ] > [ bad-guys ] [ threatens-someplace ] ;1
+[ threatens-someplace ] > [ threatens ] [ someplace ] ;1
+[ threatens ] > [ are now on the imminence of destroying  ] ;0.3
+[ threatens ] > [ spreads fear in  ] ;0.35
+[ threatens ] > [ sows a new genetically modified disease in  ] ;0.35
+[ someplace ] > [ new zeland.  ] ;0.35
+[ someplace ] > [ the moon.  ] ;0.3
+[ someplace ] > [ the royal palace of genovia.  ] ;0.35
+[ huge-fight ] > [ our-hero-and-his-friends ] [ save-the-day ] ;1
+[ our-hero-and-his-friends ] > [ it is now up to our hero and its friends to  ] ;1
+[ save-the-day ] > [ rescue-someone ]  [ while-messing-with-big-city ] ;1
+[ rescue-someone ] > [ save the helpless citizens.  ] ;0.3
+[ rescue-someone ] > [ stop the plague.  ] ;0.3
+[ rescue-someone ] > [ help townsville, that is being attacked.  ] ;0.4
+[ while-messing-with-big-city ] > [ causes-mass-distruction ] [ someone-important-dies ] ;1
+[ causes-mass-distruction ] > [ some-disaster ] [ somewhere ] ;1
+[ some-disaster ] > [ the alien ship suddenly crashes in the middle of  ] ;0.6
+[ some-disaster ] > [ they are not in time to prevent the distruction of  ] ;0.2
+[ some-disaster ] > [ then, a huge fight against the forces of evil takes place in  ] ;0.2
+[ somewhere ] > [ london,  ] ;0.2
+[ somewhere ] > [ new york,  ] ;0.2
+[ somewhere ] > [ trump's garden,  ] ;0.4
+[ somewhere ] > [ some unimportant third-world country,  ] ;0.2
+[ someone-important-dies ] > [ mourning ] [ fast-recovery ] ;1
+[ mourning ] > [ sorrow-message ] [ someone-dead ] ;1
+[ sorrow-message ] > [ and our hero have to deal with the loss of  ] ;1
+[ someone-dead ] > [ its comrades.  ] ;0.2
+[ someone-dead ] > [ its pet parakeet.  ] ;0.3
+[ someone-dead ] > [ the american standarts and moral.  ] ;0.3
+[ someone-dead ] > [ the world peace.  ] ;0.2
+[ fast-recovery ] > [ hopeful-message ] [ open-thread-for-sequel ] ;1
+[ hopeful-message ] > [ however, life goes on, and after this obnoxious events  ] ;1
+[ open-thread-for-sequel ] > [ no one is sure of what happened to the bad guys.  ] ;0.35
+[ open-thread-for-sequel ] > [ a far more evil guy gets pissed off and its ready to take action.  ] ;0.35
+[ open-thread-for-sequel ] > [ the weapon of mass distruction is put under guard of some inept folk.  ] ;0.3

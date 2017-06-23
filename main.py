@@ -1,4 +1,5 @@
 import extrai
+import early
 import gerador
 
 #Imprime a gramatica
@@ -33,7 +34,13 @@ gram = extrai.leGramatica(nome_arq)
 
 laco = True
 while laco:
-        print gerador.geraSentenca(gram),'\n\n\n'
-        teste = str(raw_input("Deseja criar nova sentenca? (Pressione enter para criar, escreva qualquer coisa e pressione enter para sair)"))
-        if teste != '':
+        sentenca = gerador.geraSentenca(gram)
+        print sentenca,'\n\n\n'
+        teste = str(raw_input("Deseja criar nova sentenca? (Pressione enter para criar, escreva exit para sair)"))
+        if teste == 'exit':
                 laco = False
+        if teste == 'check':
+                sent = early.terminaisSentenca(sentenca,gram)
+                aceita = early.early(sent,gram)
+                if aceita:
+                        print 'Faz parte'
