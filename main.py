@@ -33,13 +33,14 @@ gram = extrai.leGramatica(nome_arq)
 
 
 laco = True
-teste = str(raw_input("\nDeseja criar nova sentenca? (Pressione enter para criar, escreva exit para sair)\n"))
+teste = str(raw_input("\nDeseja criar nova sentenca? \n-Pressione enter para criar \n-Escreva exit para sair\n"))
 if teste == 'exit':
         laco = False
 while laco:
         sentenca = gerador.geraSentenca(gram)
+        print 'Nova sentenca:\n'
         print sentenca,'\n\n\n'
-        teste = str(raw_input("\nDeseja criar nova sentenca? (Pressione enter para criar, escreva exit para sair)\n"))
+        teste = str(raw_input("\nDeseja criar nova sentenca? \n-Pressione enter para criar \n-Escreva input para testar se dada sentenca faz parte da gramatica \n-Escreva check para executar o Algoritmo de Early sobre a ultima sentenca gerada \n-Escreva exit para sair\n"))
         if teste == 'exit':
                 laco = False
         if teste == 'check':
@@ -47,6 +48,17 @@ while laco:
                 aceita = early.early(sent,gram)
                 if aceita:
                         print '\nFaz parte da gramatica!\n\n'
-                        teste = str(raw_input("Deseja criar nova sentenca? (Pressione enter para criar, escreva exit para sair)\n"))
+                        teste = str(raw_input("\nDeseja criar nova sentenca? \n-Pressione enter para criar \n-Escreva input para testar se dada sentenca faz parte da gramatica \n-Escreva check para executar o Algoritmo de Early sobre a ultima sentenca gerada \n-Escreva exit para sair\n"))
                         if teste == 'exit':
                                 laco = False
+        if teste == 'input':
+                frase = str(raw_input("\nPor favor, insira uma sentenca com terminais pertencentes a gramatica. \nPara inserir terminais com espaco, utilize aspas(\"\"): "))
+                sent = early.terminaisSentenca(frase,gram)
+                while sent == -1:
+                        frase = str(raw_input("Por favor, insira uma sentenca com terminais pertencentes a gramatica. \nPara inserir terminais com espaco, utilize aspas (\"\"): "))
+                        sent = early.terminaisSentenca(frase,gram)
+                aceita=early.early(sent,gram)
+                if aceita:
+                        print '\nFaz parte da gramatica!\n\n'
+                else:
+                        print '\nNao faz parte...\n\n'
