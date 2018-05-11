@@ -6,28 +6,27 @@ import string
 def terminaisSentenca(sent,gram):
 	sentenca=[]
 	i=0
+	n=len(sent)
 	erro = False
 	
 	while i<len(sent) and (not erro):
-		while i<len(sent) and sent[i]==' ':
+		while sent[i]==' ' and i<len(sent):
 			i+=1
-		if i<len(sent) and sent[i]=='"':
+		if sent[i]=='"':
 			f=i+1
-			while f<len(sent) and sent[f] != '"':
+			while f<n and sent[f] != '"':
 				f+=1
-			if i<len(sent):
-				palavra=sent[i+1:f]
+			palavra=sent[i+1:f]
 		else:
 			f=i
-			while f<len(sent) and sent[f]!=' ':
+			while f<n and sent[f]!=' ':
 				f+=1
 			palavra=sent[i:f]
-		if i<len(sent) and palavra in gram[1]: 			#Se a palavra pertence aos terminais da Gramatica
+		if palavra in gram[1]: 			#Se a palavra pertence aos terminais da Gramatica
 			sentenca.append(palavra)	#Adiciona aos terminais da sentenca
 			i=f+1					#Na proxima iteracao, i comeca apos o final da ultima palavra
 		else:
-			if i<len(sent):
-				erro=True
+			erro=True
 	
 	if(erro):
 		return -1
@@ -40,15 +39,15 @@ def printDr(dr,r):
 	for prod in dr:
 		fim = True
 		aux=""
-		for i in range(1,len(prod[0][0])-1):
+		for i in range(1,len(prod[0])-1):
 			if prod[1] == i:	#Coloca '*' onde o marcador aponta
 				aux=aux+'*'		#
 				fim = False
-			aux=aux+prod[0][0][i]+' '
+			aux=aux+prod[0][i]+' '
 		if fim:
-			print prod[0][0][0],'>',aux,'*/',prod[2]
+			print prod[0][0],'>',aux,'*/',prod[2]
 		else:
-			print prod[0][0][0],'>',aux,'/',prod[2]
+			print prod[0][0],'>',aux,'/',prod[2]
 	print ' '
 	return;
 		
@@ -61,7 +60,7 @@ def printDr(dr,r):
 def etapa1(gram):
 	d0=[]
 	for prod in gram[2]: 			#Para todas as producoes na gramatica
-		if prod[0][0] == gram[3]:		#Caso a variavel a esquerda seja o simbolo inicial
+		if prod[0] == gram[3]:		#Caso a variavel a esquerda seja o simbolo inicial
 			aux=[prod,1,0]		#Insere em d0, com marcador na primeira posicao, conjunto 0
 			d0.append(aux)		#
 	
@@ -71,7 +70,7 @@ def etapa1(gram):
 		for dprod in d0:												#Para todas as producoes em d0
 			for gprod in gram[2]:										#Para todas as producoes da gramatica
 				aux=[gprod,1, 0]
-				if dprod[0][0][1] == gprod[0][0] and (not (aux in d0)):		#Se um marcador apontar para a mesma variavel a esquerda dessa producao da gramatica, e essa producao nao estiver incluida em d0
+				if dprod[0][1] == gprod[0] and (not (aux in d0)):		#Se um marcador apontar para a mesma variavel a esquerda dessa producao da gramatica, e essa producao nao estiver incluida em d0
 					d0.append(aux)										#Adiciona a d0
 					aumentou=True										#d0 aumentou
 	printDr(d0,0)		
@@ -85,7 +84,7 @@ def etapa2(d0,sent,gram):
 	for r in range(1,len(sent)+1):
 		dr=[]
 		for prod in drs[r-1]:						#Para todas as producoes do conjunto anterior
-			if prod[0][0][prod[1]] == sent[r-1]:		#Se elas produzirem o terminal em questao
+			if prod[0][prod[1]] == sent[r-1]:		#Se elas produzirem o terminal em questao
 				aux = [prod[0],prod[1]+1,prod[2]]	#Adiciona ao novo conjunto, movendo o marcador
 				dr.append(aux)						#
 		
@@ -95,14 +94,14 @@ def etapa2(d0,sent,gram):
 			for dprod in dr:
 				for gprod in gram[2]:
 					aux=[gprod,1,r]
-					if dprod[0][0][dprod[1]] == gprod[0][0] and (not (aux in dr)):
+					if dprod[0][dprod[1]] == gprod[0] and (not (aux in dr)):
 						dr.append(aux)
 						aumentou = True
 			for dprod in dr:
-				if dprod[1] == len(dprod[0][0])-1: 			#Se o marcador estiver no final da regra
+				if dprod[1] == len(dprod[0])-1: 			#Se o marcador estiver no final da regra
 					for prodant in drs[dprod[2]]:			#Vai no grupo em que essa regra foi criada
 						aux=[prodant[0],prodant[1]+1,prodant[2]]
-						if dprod[0][0][0]==prodant[0][0][prodant[1]] and (not (aux in dr)):
+						if dprod[0][0]==prodant[0][prodant[1]] and (not (aux in dr)):
 							dr.append(aux)
 							aumentou = True
 		printDr(dr,r)
@@ -118,6 +117,6 @@ def early(sent,gram):
 	dr=etapa2(d0,sent,gram)
 	aceita = False
 	for prod in dr:
-		if prod[0][0][0] == gram[3] and prod[1] == len(prod[0][0])-1 and prod[2] == 0: 	#Respectivamente: Parte do simbolo inicial da gramatica; Analisou toda a regra; Foi criada no conjunto inicial
+		if prod[0][0] == gram[3] and prod[1] == len(prod[0])-1 and prod[2] == 0: 	#Respectivamente: Parte do simbolo inicial da gramatica; Analisou toda a regra; Foi criada no conjunto inicial
 			aceita = True
 	return aceita;

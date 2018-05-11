@@ -12,8 +12,8 @@ def printGramatica(Gramatica):
 	P = Gramatica[2]
 	for prod in P:
 		producoes = ""
-		for ind in range(1,len(prod[0])-1):
-			producoes=producoes+prod[0][ind]+' '
+		for simbolo in prod[1:len(prod)-1]:
+			producoes=producoes+simbolo+' '
 		print prod[0][0],'>',producoes
 
 	print '  }\nS = ',Gramatica[3],'\n'
@@ -27,13 +27,25 @@ if not('.txt' in nome_arq):
     nome_arq = nome_arq + '.txt'
 	
 gram = extrai.leGramatica(nome_arq)
-#printGramatica(gram)
-
-
-
+printGramatica(gram)
 
 laco = True
-teste = str(raw_input("\nDeseja criar nova sentenca? \n-Pressione enter para criar \n-Escreva exit para sair\n"))
+while laco:
+	frase = str(raw_input("\nPor favor, insira uma sentenca com terminais pertencentes a gramatica. \nPara inserir terminais com espaco, utilize aspas(\"\"): "))
+	sent = early.terminaisSentenca(frase,gram)
+	while sent == -1:
+		frase = str(raw_input("Por favor, insira uma sentenca com terminais pertencentes a gramatica. \nPara inserir terminais com espaco, utilize aspas (\"\"): "))
+		sent = early.terminaisSentenca(frase,gram)
+
+	aceita=early.early(sent,gram)
+	if aceita:
+		print 'Faz parte da gramatica!'
+	else:
+		print 'Nao faz parte da gramatica...'
+	
+	teste = str(raw_input("Deseja testar nova sentenca? (N para sair)"))
+	if teste == 'N' or teste == 'n':
+		laco = False
 if teste == 'exit':
         laco = False
 while laco:
